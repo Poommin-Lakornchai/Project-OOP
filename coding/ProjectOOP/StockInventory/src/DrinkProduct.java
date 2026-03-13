@@ -1,6 +1,6 @@
-public class FoodProduct extends Product {
+public class DrinkProduct extends Product {
     private String expiryDate;
-    public FoodProduct(String id,String name,double price,int quantity, String expiryDate) {
+    public DrinkProduct(String id,String name,double price,int quantity, String expiryDate) {
         super(id,name,price,quantity);
         this.expiryDate = expiryDate;
     }
@@ -17,7 +17,6 @@ public class FoodProduct extends Product {
     }
     @Override
     public String getType() {
-        return "Food";
+        return "Drink";
     }
-
 }

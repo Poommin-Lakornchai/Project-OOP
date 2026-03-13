@@ -27,6 +27,13 @@ public class Main {
 
             switch (choice) {
                 case 1:
+                    System.out.println("What Type of Product ");
+                    System.out.println("1. Food");
+                    System.out.println("2. Drink");
+
+                    int choice2 = input.nextInt();
+                    input.nextLine();
+
                     System.out.print("Product ID : "); String fid = input.nextLine();
                     System.out.print("Product Name : "); String fname = input.nextLine().toUpperCase();
                     System.out.print("Product Price (Baht): "); double fprice = input.nextDouble();
@@ -34,7 +41,11 @@ public class Main {
                     input.nextLine();
                     System.out.print("Expired (YYYY-MM-DD) : "); String exp = input.nextLine();
 
-                    myStock.addProduct(new FoodProduct(fid, fname, fprice, fqty, exp));
+                    if (choice2 == 1) {
+                        myStock.addProduct(new FoodProduct(fid, fname, fprice, fqty, exp));
+                    } else if (choice2 == 2) {
+                        myStock.addProduct(new DrinkProduct(fid, fname, fprice, fqty, exp));
+                    }
                     break;
 
                 case 2:
@@ -49,6 +60,7 @@ public class Main {
                     System.out.print("Edit Product ID : ");
                     String targetId = input.nextLine();
                     Product p = myStock.getProductById(targetId);
+
 
                     if (p != null) {
                         System.out.println("Found Product: " + p.getName());
@@ -65,10 +77,12 @@ public class Main {
                             case 2:
                                 System.out.print("New Price : ");
                                 p.setPrice(input.nextDouble());
+                                input.nextLine();
                                 break;
                             case 3:
                                 System.out.print("New Quantity: ");
                                 p.setQuantity(input.nextInt());
+                                input.nextLine();
                                 break;
                             case 4:
                                 if (p instanceof FoodProduct) {
@@ -82,6 +96,8 @@ public class Main {
                     } else {
                         System.out.println("Cannot Find This Product");
                     }
+                case 5:
+
                     break;
                 default:
                     System.out.println("Please try again!");

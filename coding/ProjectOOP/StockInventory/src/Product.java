@@ -26,5 +26,5 @@ public abstract class Product {
     }
 
     public abstract void showDetail();
-
+    public abstract String getType();
 }
