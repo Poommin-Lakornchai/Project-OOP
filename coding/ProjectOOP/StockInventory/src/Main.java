@@ -69,7 +69,6 @@ public class Main {
                     String targetId = input.nextLine();
                     Product p = myStock.getProductById(targetId);
 
-
                     if (p != null) {
                         System.out.println("\n------ Edit Product ------");
                         System.out.println("Product : " + p.getName());
@@ -77,7 +76,11 @@ public class Main {
                         System.out.println("1. Edit Name");
                         System.out.println("2. Edit Price");
                         System.out.println("3. Edit Quantity");
-                        System.out.println("4. Edit Expiry Date");
+                        if (p instanceof FoodProduct) {
+                            System.out.println("4. Edit Expiry Date");
+                        } else if (p instanceof DrinkProduct) {
+                            System.out.println("4. Edit Volume");
+                        }
                         System.out.print("Select Option : ");
                         int editChoice = input.nextInt();
                         input.nextLine();
@@ -101,6 +104,10 @@ public class Main {
                                 if (p instanceof FoodProduct) {
                                     System.out.print("New ExpiryDate: ");
                                     ((FoodProduct) p).setExpiryDate(input.nextLine());
+                                } else if (p instanceof DrinkProduct) {
+                                    System.out.print("New Volume: ");
+                                    ((DrinkProduct) p).setVolume(input.nextInt());
+                                    input.nextLine();
                                 }
                                 break;
                         }
