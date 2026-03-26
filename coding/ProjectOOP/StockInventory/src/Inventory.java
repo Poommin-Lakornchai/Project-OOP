@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
 
 public class Inventory {
     private ArrayList<Product> productsList;
@@ -10,6 +9,10 @@ public class Inventory {
         productsList = new ArrayList<>();
     }
     public void addProduct(Product p) {
+        if (getProductById(p.getId()) != null) {
+            System.out.println("Product ID already exists!");
+            return;
+        }
         productsList.add(p);
         saveInventory();
         System.out.println("Successfully Add!");
@@ -22,7 +25,10 @@ public class Inventory {
 
         productsList.sort((p1, p2) -> p1.getId().compareToIgnoreCase(p2.getId()));
 
-        System.out.println("\n--- ProductList in Inventory ---");
+        System.out.println("\n--------------------------------------------------");
+        System.out.printf("| %-3s | %-5s | %-6s | %-2s |\n",
+                "ID", "NAME", "PRICE", "QTY");
+        System.out.println("--------------------------------------------------");
         for (Product p : productsList) {
             p.showDetail();
         }
@@ -41,7 +47,7 @@ public class Inventory {
 
                 if (p instanceof DrinkProduct) {
                     DrinkProduct dp = (DrinkProduct) p;
-                    line += "," + dp.getExpiryDate();
+                    line += "," + dp.getVolume();
                 }
 
                 writer.println(line);
@@ -67,7 +73,7 @@ public class Inventory {
                     if (type.equalsIgnoreCase("FOOD")) {
                         productsList.add(new FoodProduct(id, name, price, qty, data[5]));
                     } else if (type.equalsIgnoreCase("DRINK")) {
-                        productsList.add(new DrinkProduct(id, name, price, qty, data[5]));
+                        productsList.add(new DrinkProduct(id, name, price, qty, Integer.parseInt(data[5])));
                     }
 
             }
@@ -78,7 +84,7 @@ public class Inventory {
         }
     }
     public void removeProduct(String id) {
-        boolean removed = productsList.removeIf(p -> p.getId().equalsIgnoreCase(id));
+        boolean removed = productsList.removeIf(p->p.getId().equalsIgnoreCase(id));
 
         if (removed) {
             saveInventory();

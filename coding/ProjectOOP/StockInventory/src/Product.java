@@ -10,6 +10,12 @@ public abstract class Product {
         this.price = price;
         this.quantity = quantity;
     }
+    public Product(String id, String name) {
+        this.id = id;
+        this.name = name;
+        this.price = 0;
+        this.quantity = 0;
+    }
     public String getId() { return id; }
     public String getName() { return name; }
     public int getQuantity() { return quantity; }
