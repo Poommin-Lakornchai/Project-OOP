@@ -7,8 +7,8 @@ public class Main {
         Inventory myStock = new Inventory();
 
         myStock.readInventory();
-
         showSystem(input,myStock);
+
     }
     public static void showSystem(Scanner input,Inventory myStock) {
         while (true) {
@@ -88,7 +88,7 @@ public class Main {
                         switch (editChoice) {
                             case 1:
                                 System.out.print("New Name : ");
-                                p.setName(input.nextLine());
+                                p.setName(input.nextLine().toUpperCase());
                                 break;
                             case 2:
                                 System.out.print("New Price : ");
@@ -114,7 +114,7 @@ public class Main {
                         myStock.saveInventory();
                         System.out.println("Edit Successfully!");
                     } else {
-                        System.out.println("Cannot Find This Product");
+                        System.out.println("Cannot Find Product Id: " + targetId);
                     }
                     break;
                 case 5 :

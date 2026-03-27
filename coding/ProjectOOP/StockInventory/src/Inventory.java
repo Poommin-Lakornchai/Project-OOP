@@ -102,10 +102,15 @@ public class Inventory {
         return null;
     }
     public void searchProduct(String keyword) {
+        boolean found = false;
         for (Product p : productsList) {
             if (p.getName().toLowerCase().contains(keyword.toLowerCase())) {
                 p.showDetail();
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("Cannot Find Product Name: " + keyword);
         }
     }
 }
